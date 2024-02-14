@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Studies{% endblock title %}
+{% block content %}
+<h1>🔒 Studies</h1>
+{% for study in studies %}
+<div class="mb-3 row">
+    <div class="col-6">
+        <a href="{% url 'standby' study=study.software institution=study.institution trail=study.trail%}" class="align-middle">{{study}}</a>
+    </div>
+    <div class="col-6">
+        {% if study.serverendtime is not None %}
+            <a href="{% url 'export' session=study.session %}" class="btn btn-primary">Export results</a>
+        {% else %}
+            {% if study.servertime is not None %}
+                <a href="{% url 'record' session=study.session %}">Recording</a>
+            {% else %}
+                <span>Ready</span>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+{% endblock content %}

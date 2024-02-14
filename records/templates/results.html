@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Results{% endblock title %}
+{% block content %}
+<h1>Results</h1>
+<div class="text-center">
+    <div class="mb-3 row">
+        <div class="col">
+            <a href="{% url 'study' study=study %}" class="btn btn-primary w-50">New trail</a>
+        </div>
+    </div>
+</div>
+
+<h2>{{observations}} observations</h2>
+<div class="row">
+    <div class="col-4">
+        Start time:
+    </div>
+    <div class="col-8">
+        {{start_time}}
+    </div>
+</div>
+<table class="table small">
+    <thead>
+        <th>label</th>
+        <th>seconds since start</th>
+        <th>behavior</th>
+        <th>affect</th>
+        <th>#</th>
+    </thead>
+{% for record in records %}
+    <tr>
+        <td>{{record.subject.label}}</td>
+        <td><span class="time_diff" time="{{record.servertime|date:'Y-m-d H:i:s'}}" start="{{record.subject.study.servertime|date:'Y-m-d H:i:s'}}"></span></td>
+        <td>{{record.behavior}}</td>
+        <td>{{record.affect}}</td>
+        <td>
+            {% if record.marked %}🚩{% endif %}
+            <a href="#" class="note" data-id="{{record.pk}}" data-note="{% if record.note is not None %}{{record.note}}{% endif %}">
+                <span class="badge bg-{% if record.note is not None and record.note != '' %}primary{% else %}secondary{% endif %}">🏷️</span>
+            </a>
+            <a href="#" class="exclude" data-id="{{record.pk}}" data-exclude="{{record.exclude}}">
+                {% if record.exclude %}
+                <span class="badge bg-success">↩️</span>
+                {% else %}
+                <span class="badge bg-danger">🗑️</span>
+                {% endif %}
+            </a>
+        </td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock content %}
+{% block script %}
+<script>
+    $('.time_diff').each(function (){
+        var start = new Date($(this).attr("start"));
+        var time = new Date($(this).attr("time"));
+        $(this).text(parseInt((time-start)/1000));
+    });
+    $('.note').click(function () {
+        let noteTxt = prompt("Note for observation", $(this).attr("data-note"));
+        if (noteTxt != null) {
+            $.post("/records/{{session}}/observations/" + $(this).attr("data-id") + "/", {note:noteTxt, csrfmiddlewaretoken: '{{ csrf_token }}'});
+            $(this).attr("data-note", noteTxt);
+            if (noteTxt == "") 
+                $(this).find("span").removeClass("bg-primary").addClass("bg-secondary");
+            else
+                $(this).find("span").removeClass("bg-secondary").addClass("bg-primary");
+        }
+    });
+    $('.exclude').click(function () {
+        ex = $(this).attr("data-exclude") == "False" ? "True" : "False";
+        $.post("/records/{{session}}/observations/" + $(this).attr("data-id") + "/", {exclude: ex, csrfmiddlewaretoken: '{{ csrf_token }}'});
+        $(this).attr("data-exclude", ex);
+        if (ex == "False")
+            $(this).find("span").removeClass("bg-success").addClass("bg-danger").text('🗑️');
+        else
+            $(this).find("span").removeClass("bg-danger").addClass("bg-success").text('↩️');
+    });
+</script>
+{% endblock script %}

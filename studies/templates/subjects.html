@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Subjects for {{study}}.{{institution}}.{{trail}}{% endblock title %}
+{% block content %}
+<h1>Subject</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3 row">
+        <label class="col-4 col-form-label" for="subjects">No. of Subjects:</label>
+        <div class="col-4">
+            <input id="no_subjects" class="form-control " name="subjects" type="number" value="1" min="1" readonly/>
+        </div>
+        <div class="col-4">
+            <button type="button" id="add_subject" class="btn btn-primary">&plus;</button>
+            <button type="button" id="remove_subject" class="btn btn-primary">&minus;</button>
+        </div>
+    </div>
+
+    <div id="subject_list">
+        <div class="mb-3 row subject">
+            <label class="col-4 col-form-label subject_id_label" for="subject_id">Subject <span class="subject_number">1</span>  ID:</label>
+            <div class="col-8">
+                <input class="form-control subject_id" name="subject_id" type="text" />
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="form-control btn btn-secondary mb-3">Save and finish</button>
+</form>
+{% endblock content %}
+
+{% block script %}
+<script>
+    $('#add_subject').click(function(){
+        newVal = Math.min(parseInt($('#no_subjects').val()) + 1, 99)
+        $('#no_subjects').val(newVal);
+        newSubject = $('.subject:last').clone();
+        newSubject.find(".subject_id").val('');
+        newSubject.find("span.subject_number").text(newVal);
+        newSubject.appendTo('#subject_list');
+    });
+
+    $('#remove_subject').click(function(){
+        newVal = Math.max(parseInt($('#no_subjects').val()) - 1, 1)
+        $('#no_subjects').val(newVal);
+         $('.subject:last').remove();
+    });
+</script>
+{% endblock script %}

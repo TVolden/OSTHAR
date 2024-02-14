@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hart>
+	<category id="behavior">
+		<codelist id="PSLCBEHAVIORV1">
+			<item id="ON TASK" />
+			<item id="ON TASK CONV" />			
+			<item id="OFF TASK" />
+			<item id="$" />			
+			<item id="?" />
+		</codelist>
+		<codelist id="ECOMUVEBEHAVIORV1">
+			<item id="ON TASK" />
+			<item id="ON TASK CONV" />			
+			<item id="OFF TASK" />
+			<item id="$" />
+			<item id="UDEF1" />
+			<item id="UDEF2" />
+			<item id="UDEF3" />
+			<item id="?" />									
+		</codelist>
+		<codelist id="BAKER2004">
+			<item id="ON TASK" />
+			<item id="ON TASK CONV" />			
+			<item id="OFF TASK SOL." />		    
+			<item id="INACTIVE" />
+			<item id="$" />
+			<item id="?" />						
+		</codelist>
+		<codelist id="ROSEBAKERV1">
+			<item id="ON TASK CONV." />	
+			<item id="OFF TASK CONV" />	
+			<item id="PERP PHYSICAL" />	
+			<item id="VICTIM PHYSICAL" />	
+			<item id="PERP VERBAL" />	
+			<item id="VICTIM VERBAL" />	
+			<item id="PERP TEASING" />	
+			<item id="VICTIM TEASING" />	
+			<item id="?" />	
+		</codelist>
+		<codelist id="FISHERD12011V1">
+			<item id="NO" />
+			<item id="INTERVENTION" />		
+		</codelist>
+		<codelist id="FISHERD12011V4">
+			<item id="ON TASK" /> 
+			<item id="PEER" /> 
+			<item id="ENVIRONMENT" /> 
+			<item id="SUPPLIES" /> 
+			<item id="SELF" /> 
+			<item id="WALKING" /> 
+			<item id="OTHEROFF" /> 
+			<item id="?" />		
+		</codelist>
+		<codelist id="FISHERTEACHV1">
+			<item id="ON TASK" /> 
+			<item id="PEER" /> 
+			<item id="ENVIRONMENT" /> 
+			<item id="SUPPLIES" /> 
+			<item id="SELF" /> 
+			<item id="WALKING" /> 
+			<item id="WHOLECHAOS" />
+			<item id="OTHERINT" />
+			<item id="?" />		
+		</codelist>
+		<codelist id="MOMOBEBE">
+			<item id="REENTER" />
+			<item id="FINGERS" />
+			<item id="WAITING" />
+			<item id="?" />		
+		</codelist>
+		<codelist id="REFRACTION_B1">
+			<item id="ON TASK" />
+			<item id="OTHER ON CONV" />
+			<item id="OFF TASK" />
+			<item id="REC HELP" />
+			<item id="GIVE HELP" />
+			<item id="?" />		
+		</codelist>
+		<codelist id="NYSCIBEHAV">
+			<item id="Active" /> 
+			<item id="Passive Plus" /> 
+			<item id="Passive Minus" /> 
+			<item id="Disruptive" /> 
+			<item id="?" />		
+		</codelist>		
+	</category>
+	
+	<category id="affect">
+		<codelist id="PSLCAFFECTV1">
+			<item id="BORED" />
+			<item id="CONFUSED" />
+			<item id="CONCENTRATING" />
+			<item id="FRUSTRATED" />
+			<item id="?" />			
+		</codelist>
+		<codelist id="ECOMUVEAFFECTV1">
+			<item id="BORED" />
+			<item id="CONFUSED" />
+			<item id="CONCENTRATING" />
+			<item id="FRUSTRATED" />
+			<item id="DELIGHT" />
+			<item id="SORROW" />
+			<item id="UDEF1" />
+			<item id="?" />							
+		</codelist>
+		<codelist id="DMELLO2007">
+			<item id="BORED" />
+			<item id="CONFUSED" />
+			<item id="DELIGHTED" />
+			<item id="CONCENTRATION" />
+			<item id="FRUSTRATION" />
+			<item id="SURPRISE" />
+			<item id="NEUTRAL" />
+			<item id="?" />				
+		</codelist>
+		<codelist id="FISHERD22011">
+			<item id="SELF" />
+			<item id="ENVIRONMENT" />
+			<item id="PEER" />
+			<item id="WALKING" />
+			<item id="ON TASK" />
+			<item id="?" />	
+		</codelist>
+		<codelist id="FISHERCLASSACTSV1">
+			<item id="WHOLEDESKS" />
+			<item id="WHOLECARPET" />
+			<item id="SGINDIV" />
+			<item id="SGTEACH" />
+			<item id="INDIV" />
+			<item id="OTHER" />
+			<item id="?" />		
+		</codelist>
+		<codelist id="REFRACTION_A1">
+			<item id="BORED" />
+			<item id="CONFUSED" />
+			<item id="CONCENTRATING" />
+			<item id="FRUSTRATED" />
+			<item id="DELIGHT" />
+			<item id="EUREKA" />
+			<item id="SURPRISE" />
+			<item id="?" />			
+		</codelist>
+		<codelist id="NYSCIAFFECT">
+			<item id="Bored" />
+			<item id="Frustrated" />
+			<item id="Happy" />
+			<item id="Confused" />
+			<item id="Interested/Focus" />
+			<item id="?" />		
+		</codelist>
+	</category>
+
+	<category id="intervention">
+		<codelist id="FISHERV1">
+			<item id="Intervention" /> 
+			<item id="Whole" />   
+			<item id="?" />		
+		</codelist>
+		<codelist id="NYSCICOG">
+			<item id="Thinking" /> 
+			<item id="Unrelated Thinking" />  
+			<item id="?" />		
+		</codelist>
+	</category>	
+</hart>

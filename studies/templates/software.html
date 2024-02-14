@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Study{% endblock title %}
+{% block content %}
+<h1>Study</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3 row">
+        <label class="col-3 col-form-label" for="username">Username:</label>
+        <div class="col-9">
+            <input class="form-control" name="username" type="text" />
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-3 col-form-label" for="software">Software:</label>
+        <div class="col-9">
+            <input class="form-control" name="software" type="text" />
+        </div>
+    </div>
+
+    <button type="submit" class="form-control btn btn-primary mb-3">Continue</button>
+</form>
+{% endblock content %}

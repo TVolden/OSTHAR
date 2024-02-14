@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}Observation for {{study}}.{{institution}}.{{trail}}{% endblock title %}
+{% block content %}
+<h1>Observation</h1>
+<form method="post">
+    {% csrf_token %}
+    <input id="localtime" type="hidden" name="localtime">
+    <input type="hidden" name="intervention" value="nop">
+    <div class="mb-3 row">
+        <label class="col-4 col-form-label" for="subject_id">Subject:</label>
+        <div class="col-2">
+            <input class="form-control-plaintext" name="subject_id" type="number" value="{{subject_id}}" readonly />
+        </div>
+        <div class="col-6">
+            <input class="form-control" type="text" value="{{label}}" disabled />
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-6 col-form-label" for="timer">Observation time:</label>
+        <div class="col-6">
+            <input id="timer" class="form-control" type="text" value="0" disabled />
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-3 col-form-label" for="behavior">Behavior:</label>
+        <div class="col-9">
+            <select class="form-control" name="behavior">
+                {% for behavior in behaviors %}
+                <option value="{{behavior}}">{{behavior}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-3 col-form-label" for="affect">Affect:</label>
+        <div class="col-9">
+            <select class="form-control" name="affect">
+                {% for affect in affects %}
+                <option value="{{affect}}">{{affect}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <button type="submit" class="form-control btn btn-primary mb-3">Save and continue</button>
+    <div class="mb-3 row">
+        <div class="col-3">
+            <a class="btn btn-outline-secondary w-100" href="{% url 'observation' session=session subject_id=next_subject_id %}">Skip</a>
+        </div>
+        <div class="col-9">
+            <button type="button" class="form-control btn btn-secondary" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+                Save and finish
+            </button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="confirmationModalLabel">Please confirm</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Are you sure you want to finish?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" name="finish" value="True">Save and finish</button>
+        </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+<h2>Latest observations (3/{{observations}})</h2>
+<table class="table small">
+    <thead>
+        <th>label</th>
+        <th>seconds since start</th>
+        <th>behavior</th>
+        <th>affect</th>
+        <th>🚩</th>
+    </thead>
+{% for record in latest_records %}
+    <tr>
+        <td>{{record.subject.label}}</td>
+        <td><span class="time_diff" time="{{record.servertime|date:'Y-m-d H:i:s'}}" start="{{record.subject.study.servertime|date:'Y-m-d H:i:s'}}"></span></td>
+        <td>{{record.behavior}}</td>
+        <td>{{record.affect}}</td>
+        <td><input class="form-check-input marked" type="checkbox" data-id="{{record.pk}}" {% if record.marked %}checked{% endif %}/></td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock content %}
+{% block script %}
+<script>
+    $('form:first').submit(function() {
+        $('#localtime').val(Date.now())
+    })
+    $( document ).ready(function () {
+        var start_time = Date.now();
+        setInterval(function (){
+            $("#timer").val(parseInt((Date.now() - start_time)/1000));
+        }, 1000);
+        $('.time_diff').each(function (){
+            var start = new Date($(this).attr("start"));
+            var time = new Date($(this).attr("time"));
+            $(this).text(parseInt((time-start)/1000));
+        });
+    });
+    $('.marked').click(function () {
+        chk = this.checked ? "True" : "False";
+        $.post("/records/{{session}}/observations/" + $(this).attr("data-id") + "/", 
+        {mark:chk, csrfmiddlewaretoken: '{{ csrf_token }}'})
+    })
+</script>
+{% endblock script %}

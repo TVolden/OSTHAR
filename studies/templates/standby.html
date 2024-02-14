@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Standby for {{study}}.{{institution}}.{{trail}}{% endblock title %}
+{% block content %}
+<h1>Ready to start</h1>
+{% if study == "yoli" %}
+<p>Place the indicator tile on the board and press start recording when the board accepts the tile.</p>
+{% endif %}
+<div class="row mb-3 text-center">
+<form method="post">
+    {% csrf_token %}
+    <input id="localtime" type="hidden" name="localtime">
+    <div class="col">
+        <button type="submit" class="btn btn-primary w-75 align-middle">Start recording</a>
+    </div>
+</form>
+</div>
+<div class="row">
+    <div class="col-12 text-center">
+        <a class="btn btn-secondary w-75" href="{% url 'subjects' study=study institution=institution trail=trail %}">Edit students</a>
+    </div>
+</div>
+{% endblock content %}
+{% block script %}
+<script>
+    $('form:last').submit(function() {
+        $('#localtime').val(Date.now())
+    })
+</script>
+{% endblock script %}

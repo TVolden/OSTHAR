@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Study of {{study}}{% endblock title %}
+{% block content %}
+<h1>Trail</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3 row">
+        <label class="col-3 col-form-label" for="institution">Institution:</label>
+        <div class="col-9">
+            <input class="form-control" name="institution" type="text" />
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label class="col-3 col-form-label" for="trail">Trail:</label>
+        <div class="col-9">
+            <input class="form-control" name="trail" type="text" />
+        </div>
+    </div>
+
+    <button type="submit" class="form-control btn btn-primary mb-3">Continue</button>
+</form>
+{% endblock content %}
