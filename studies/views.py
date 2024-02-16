@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth.models import User
 from django.template import loader
 from django.http import HttpResponse, HttpRequest
 from django.contrib import admin
@@ -8,14 +10,27 @@ from django.utils import timezone
 
 # Create your views here.
 def index(request:HttpRequest):
-    if "username" in request.POST and "software" in request.POST:
+    user_required = False
+    if "username" in request.POST and \
+        "software" in request.POST and \
+        (not user_required or ("password" in request.POST and \
+        _login(request.POST["username"], request.POST["password"]))):
+
         request.session["user"] = request.POST["username"]
         return redirect("study", study=request.POST["software"])
     else:
         template = loader.get_template('software.html')
         context = {
+            "login_required": user_required
         }
         return HttpResponse(template.render(context, request))
+
+def _login(user, password):
+    try:
+        u = User.objects.get(username=user)
+        return check_password(password, u.password)
+    except:
+        return False
 
 def study(request:HttpRequest, study):
     if "institution" in request.POST:
