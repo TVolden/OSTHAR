@@ -70,7 +70,7 @@ def results(request:HttpRequest, session):
 @admin.site.admin_view
 def export(request:HttpRequest, session):
     s = Study.objects.get(session=session)
-    records = Record.objects.raw("SELECT * FROM records_record WHERE subject_id in (SELECT id from studies_subject where study_id = %s) ORDER BY id desc;", [s.pk])
+    records = Record.objects.raw("SELECT * FROM records_record WHERE subject_id in (SELECT id from studies_subject where study_id = %s) AND Exclude = False ORDER BY id desc;", [s.pk])
     response = HttpResponse(
         content_type="text/csv",
         headers={"Content-Disposition": f'attachment; filename="{s}.csv"'},
