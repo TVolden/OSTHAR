@@ -12,7 +12,7 @@
             <a href="{% url 'export' session=study.session %}" class="btn btn-primary">Export results</a>
         {% else %}
             {% if study.servertime is not None %}
-                <a href="{% url 'record' session=study.session %}">Recording</a>
+                <a href="{% url 'records' session=study.session %}">Recording</a>
             {% else %}
                 <span>Ready</span>
             {% endif %}
