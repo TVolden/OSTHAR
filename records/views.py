@@ -81,7 +81,7 @@ def export(request:HttpRequest, session):
     )
     writer = csv.writer(response)
     writer.writerow(["FILE HEADER KEY:", "username", "software", "institution", "trial", "numsubjects", "behavior", "affect", "localtime", "servertime", "intervention"])
-    writer.writerow([s.username, s.software, s.institution, s.trial, s.subject_set.count(), s.behavior, s.affect, s.localtime, s.servertime, s.institution])
+    writer.writerow([s.username, s.software, s.institution, s.trial, s.subject_set.count(), s.behavior, s.affect, s.localtime, s.servertime, s.intervention])
     writer.writerow(["FILE DATA KEY:", "subject", "offsetfromstart", "behavior", "affect", "intervention"])
     for record in records:
         writer.writerow([record.subject.label, record.servertime-s.servertime, record.behavior, record.affect, record.intervention])
