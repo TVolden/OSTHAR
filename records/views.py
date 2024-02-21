@@ -49,6 +49,9 @@ def observation(request:HttpRequest, session, subject_id):
             "behaviors": get_behaviors(s.behavior),
             "latest_records": obs[:3],
             "observations": len(obs),
+            "last_behavior": obs[0].behavior if len(obs) > 0 else "",
+            "last_affect": obs[0].affect if len(obs) > 0 else "",
+            "last_intervention": obs[0].intervention if len(obs) > 0 else "",
         }
         return HttpResponse(template.render(context, request))
     

@@ -26,7 +26,7 @@
         <div class="col-9">
             <select class="form-control" name="behavior">
                 {% for behavior in behaviors %}
-                <option value="{{behavior}}">{{behavior}}</option>
+                <option value="{{behavior}}" {% if last_behavior == behavior %}selected=true{% endif %}>{{behavior}}</option>
                 {% endfor %}
             </select>
         </div>
@@ -36,7 +36,7 @@
         <div class="col-9">
             <select class="form-control" name="affect">
                 {% for affect in affects %}
-                <option value="{{affect}}">{{affect}}</option>
+                <option value="{{affect}}" {% if last_affect == affect %}selected=true{% endif %}>{{affect}}</option>
                 {% endfor %}
             </select>
         </div>
@@ -73,7 +73,7 @@
     </div>
 </form>
 
-<h2>Latest observations (3/{{observations}})</h2>
+<h2>Latest observations ({% if observations > 3 %}3/{% endif %}{{observations}})</h2>
 <table class="table small">
     <thead>
         <th>label</th>
