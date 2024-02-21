@@ -60,6 +60,7 @@ def results(request:HttpRequest, session):
             "session": session,
             "study": s.software,
             "start_time": s.servertime,
+            "institution": s.institution,
             "records": obs,
             "observations": len(obs),
         }

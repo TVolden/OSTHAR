@@ -38,7 +38,8 @@ def study(request:HttpRequest, study):
     else:
         template = loader.get_template('study.html')
         context = {
-            "study": study
+            "study": study,
+            "institution": request.GET["institution"] if "institution" in request.GET else ""
         }
 
         return HttpResponse(template.render(context, request))
