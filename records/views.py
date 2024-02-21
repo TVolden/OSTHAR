@@ -41,7 +41,7 @@ def observation(request:HttpRequest, session, subject_id):
             "session": session,
             "study": s.software,
             "institution": s.institution,
-            "trail": s.trail,
+            "trial": s.trial,
             "subject_id": subject_id,
             "next_subject_id": next_id,
             "label": sub.label,
@@ -76,8 +76,8 @@ def export(request:HttpRequest, session):
         headers={"Content-Disposition": f'attachment; filename="{s}.csv"'},
     )
     writer = csv.writer(response)
-    writer.writerow(["FILE HEADER KEY:", "username", "software", "institution", "trail", "numsubjects", "behavior", "affect", "localtime", "servertime", "intervention"])
-    writer.writerow([s.username, s.software, s.institution, s.trail, s.subject_set.count(), s.behavior, s.affect, s.localtime, s.servertime, s.institution])
+    writer.writerow(["FILE HEADER KEY:", "username", "software", "institution", "trial", "numsubjects", "behavior", "affect", "localtime", "servertime", "intervention"])
+    writer.writerow([s.username, s.software, s.institution, s.trial, s.subject_set.count(), s.behavior, s.affect, s.localtime, s.servertime, s.institution])
     writer.writerow(["FILE DATA KEY:", "subject", "offsetfromstart", "behavior", "affect", "intervention"])
     for record in records:
         writer.writerow([record.subject.label, record.servertime-s.servertime, record.behavior, record.affect, record.intervention])

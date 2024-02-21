@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block title %}Standby for {{study}}.{{institution}}.{{trail}}{% endblock title %}
+{% block title %}Standby for {{study}}.{{institution}}.{{trial}}{% endblock title %}
 {% block content %}
 <h1>Unable to start</h1>
-<p>This trail has already started. Please select a different trial.</p>
+<p>This trial has already started. Please select a different trial.</p>
 <div class="row">
     <div class="col-12 text-center">
         <a class="btn btn-secondary w-75" href="{% url 'study' study=study %}">Select study</a>

@@ -5,7 +5,7 @@
 {% for study in studies %}
 <div class="mb-3 row">
     <div class="col-6">
-        <a href="{% url 'standby' study=study.software institution=study.institution trail=study.trail%}" class="align-middle">{{study}}</a>
+        <a href="{% url 'standby' study=study.software institution=study.institution trial=study.trial%}" class="align-middle">{{study}}</a>
     </div>
     <div class="col-6">
         {% if study.serverendtime is not None %}

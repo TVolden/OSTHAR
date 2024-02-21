@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import Study, Subject
 
 class StudyAdmin(admin.ModelAdmin):
-     list_display = ('pk', 'software', 'institution', 'trail', 'username')
+     list_display = ('pk', 'software', 'institution', 'trial', 'username')
 
 admin.site.register(Study, StudyAdmin)
 admin.site.register(Subject)

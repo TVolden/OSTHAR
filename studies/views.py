@@ -34,7 +34,7 @@ def _login(user, password):
 
 def study(request:HttpRequest, study):
     if "institution" in request.POST:
-        return redirect("subjects", study=study, institution=request.POST["institution"], trail=request.POST["trail"])
+        return redirect("subjects", study=study, institution=request.POST["institution"], trial=request.POST["trial"])
     else:
         template = loader.get_template('study.html')
         context = {
@@ -43,9 +43,9 @@ def study(request:HttpRequest, study):
 
         return HttpResponse(template.render(context, request))
     
-def subjects(request:HttpRequest, study, institution, trail):
+def subjects(request:HttpRequest, study, institution, trial):
     try:
-        s = Study.objects.get(software=study, institution=institution, trail=trail)
+        s = Study.objects.get(software=study, institution=institution, trial=trial)
     except:
         s = None
 
@@ -55,7 +55,7 @@ def subjects(request:HttpRequest, study, institution, trail):
                 username=request.session['user'],
                 software=study,
                 institution=institution,
-                trail=trail,
+                trial=trial,
                 behavior="PSLCBEHAVIORV1",
                 affect="PSLCAFFECTV1",
                 intervention="nop"
@@ -69,20 +69,20 @@ def subjects(request:HttpRequest, study, institution, trail):
                 number=i+1, 
                 label=stud
                 )
-        return redirect("standby", study=study, institution=institution, trail=trail)
+        return redirect("standby", study=study, institution=institution, trial=trial)
     else:
         template = loader.get_template('subjects.html')
         context = {
             "study": study,
             "institution": institution,
-            "trail": trail
+            "trial": trial
         }
 
         return HttpResponse(template.render(context, request))
     
-def standby(request:HttpRequest, study, institution, trail):
+def standby(request:HttpRequest, study, institution, trial):
         try:
-            s = Study.objects.get(software=study, institution=institution, trail=trail)
+            s = Study.objects.get(software=study, institution=institution, trial=trial)
         except:
             s = None
         
@@ -91,7 +91,7 @@ def standby(request:HttpRequest, study, institution, trail):
             context = {
                 "study": study,
                 "institution": institution,
-                "trail": trail
+                "trial": trial
             }
 
             return HttpResponse(template.render(context, request))
@@ -100,7 +100,7 @@ def standby(request:HttpRequest, study, institution, trail):
             context = {
                 "study": study,
                 "institution": institution,
-                "trail": trail
+                "trial": trial
             }
 
             return HttpResponse(template.render(context, request))
@@ -114,7 +114,7 @@ def standby(request:HttpRequest, study, institution, trail):
             context = {
                 "study": study,
                 "institution": institution,
-                "trail": trail
+                "trial": trial
             }
 
             return HttpResponse(template.render(context, request))

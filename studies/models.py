@@ -6,7 +6,7 @@ class Study(models.Model):
     username = models.CharField(max_length=200)
     software = models.CharField(max_length=200)
     institution = models.CharField(max_length=200)
-    trail = models.CharField(max_length=200)
+    trial = models.CharField(max_length=200)
     behavior = models.CharField(max_length=200)
     affect = models.CharField(max_length=200)
     localtime = models.DateTimeField(null=True)
@@ -17,7 +17,7 @@ class Study(models.Model):
     serverendtime = models.DateTimeField(null=True)
 
     def __str__(self) -> str:
-        return f"{self.software}.{self.institution}.{self.trail}"
+        return f"{self.software}.{self.institution}.{self.trial}"
 
 class Subject(models.Model):
     study = models.ForeignKey(Study, on_delete=models.CASCADE)

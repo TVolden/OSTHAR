@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Study of {{study}}{% endblock title %}
 {% block content %}
-<h1>Trail</h1>
+<h1>Trial</h1>
 <form method="post">
     {% csrf_token %}
     <div class="mb-3 row">
@@ -12,9 +12,9 @@
     </div>
 
     <div class="mb-3 row">
-        <label class="col-3 col-form-label" for="trail">Trail:</label>
+        <label class="col-3 col-form-label" for="trial">Trial:</label>
         <div class="col-9">
-            <input class="form-control" name="trail" type="text" />
+            <input class="form-control" name="trial" type="text" />
         </div>
     </div>
 

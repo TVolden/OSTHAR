@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Standby for {{study}}.{{institution}}.{{trail}}{% endblock title %}
+{% block title %}Standby for {{study}}.{{institution}}.{{trial}}{% endblock title %}
 {% block content %}
 <h1>Ready to start</h1>
 {% if study == "yoli" %}
@@ -16,7 +16,7 @@
 </div>
 <div class="row">
     <div class="col-12 text-center">
-        <a class="btn btn-secondary w-75" href="{% url 'subjects' study=study institution=institution trail=trail %}">Edit students</a>
+        <a class="btn btn-secondary w-75" href="{% url 'subjects' study=study institution=institution trial=trial %}">Edit students</a>
     </div>
 </div>
 {% endblock content %}
