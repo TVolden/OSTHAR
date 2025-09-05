@@ -4,13 +4,14 @@ from django.contrib.auth.models import User
 from django.template import loader
 from django.http import HttpResponse, HttpRequest
 from django.contrib import admin
+from django.conf import settings
 from studies.models import Study, Subject
 from datetime import datetime
 from django.utils import timezone
 
 # Create your views here.
 def index(request:HttpRequest):
-    user_required = False
+    user_required = settings.OBSERVER_USER_REQUIRED
     if "username" in request.POST and \
         "software" in request.POST and \
         (not user_required or ("password" in request.POST and \

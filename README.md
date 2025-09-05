@@ -60,6 +60,20 @@ As a superuser, you can access the Django system by accessing the `<domain>/admi
 For example: `127.0.0.1:8000/admin` when running locally. 
 From here you can add users and access the data.
 
+# Safety advice
+
+The server should only run on trusted hardware over a secure HTTPS connection, as the collected data should be considered sensitive.
+Try to limit access to the web app to only allow the super users and observers to access the homepage to prevent external interference with the data. 
+If the service is publicly available then Basic HTTP authentication can be applied.
+
+Alternatively, it is possible to require observers to have user logins(created in the Django system), by chaning the following in `settings.py`:
+
+```python
+OBSERVER_USER_REQUIRED = True
+```
+
+*Note that this setting only affects the first page and not links for ready trials. So it's still possible to setup a trial and share the link*
+
 ## Dependency notice
 
 The file `static\HARTSchemas.xml` is a direct copy from https://github.com/pcla-code/HART/blob/main/HARTSchemas.xml and the owners of the repository retain the copyright of the file and its contents.
