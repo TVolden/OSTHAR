@@ -1,5 +1,6 @@
 # OSTHAR
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17062039.svg)](https://doi.org/10.5281/zenodo.17062039)
+
 Open Source Tool for Human Affect Recording inspired by Human Affect Recording Tool - Implemented with Django for most compatibility
 
 ## Getting started
